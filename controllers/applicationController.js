@@ -17,9 +17,16 @@ exports.applyJob = async (req, res) => {
       });
     }
 
-    const resumeUrl = req.file
-      ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
-      : req.body.resume;
+// const resumeUrl = req.file
+//   ? req.file.path
+//   : req.body.resume;
+console.log("FILE DATA:", req.file);
+
+const resumeUrl = req.file
+  ? req.file.path
+  : req.body.resume;
+
+console.log("RESUME URL:", resumeUrl);
 
     const application = await Application.create({
 
