@@ -19,16 +19,17 @@ const {
   "../controllers/applicationController"
 );
 
-const storage =
-new CloudinaryStorage({
-
+const storage = new CloudinaryStorage({
   cloudinary,
 
-  params: {
-  folder: "resumes",
-  resource_type: "auto"
-}
-
+  params: async (req, file) => ({
+    folder: "resumes",
+    resource_type: "raw",
+    format: "pdf",
+    public_id:
+      Date.now() + "-" +
+      file.originalname.replace(".pdf", "")
+  })
 });
 
 const upload =
